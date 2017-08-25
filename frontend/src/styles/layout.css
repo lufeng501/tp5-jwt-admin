@@ -1,0 +1,26 @@
+html body{
+  padding: 0px;
+  margin: 0px;
+}
+
+#layout {
+    background-color: #D3DCE6;
+}
+
+.layout-content {
+    padding: 10px;
+}
+
+.box-breadcrumb {
+    border: 0px !important;
+    border-radius: 0px !important;
+    background-color: #EFF2F7 !important;
+    box-shadow: 0 0px 0px 0 rgba(0,0,0,.12), 0 0 6px 0 rgba(0,0,0,.04) !important;
+}
+
+.pull-left {
+    float: left !important;
+}
+.pull-right {
+    float: right !important;
+}

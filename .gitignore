@@ -1,3 +1,5 @@
-.idea
+*.idea
 composer.lock
 *.log
+frontend/node_modules
+frontend/package-lock.json
