@@ -23,8 +23,6 @@ class Home extends Controller
 
     public function index()
     {
-        $resp['code'] = 1;
-        $resp['msg'] = "hehehe";
-        echo json_encode($resp);
+        return echoJson();
     }
 }

@@ -11,6 +11,7 @@ namespace app\index\controller;
 
 
 use Firebase\JWT\JWT;
+use servers\JwtHander;
 use think\Controller;
 use think\Env;
 use think\Log;
@@ -18,58 +19,38 @@ use think\Request;
 
 class Auth extends Controller
 {
+    /**
+     * 登陆接口
+     */
     public function dologin()
     {
         $request = request();
         $params = $request->param();
         if (!empty($params['username']) && !empty($params['password']) && $params['username'] == "root" && $params['password'] == "123456") {
-            $resp['code'] = 1;
-            $resp['msg'] = "用户登陆成功";
-            $resp['jwt'] = $this->getJwt($params['username'], $request->host());
-            echo json_encode($resp);
-            die;
+            $resp['jwt'] = JwtHander::getInstance()->generateJwt($params['username'], $request->host());
+            return echoJson($resp);
         } else {
-            $resp['code'] = -1;
-            $resp['msg'] = "用户登陆失败";
-            echo json_encode($resp);
-            die;
-        }
-    }
-
-    public function checkLogin()
-    {
-        $info = Request::instance()->header();
-        if (!empty($info['x-jwt-header'])) {
-            $key = Env::get('jwt_key');
-            $jwt = $info['x-jwt-header'];
-            $decoded = JWT::decode($jwt, $key, array('HS256'));
-            $resp['data'] = $decoded;
-            $resp['code'] = 1;
-            echo json_encode($resp);
-            die;
-        } else {
-            $resp['code'] = 1;
-            $resp['msg'] = "用户登陆超时";
-            echo json_encode($resp);
-            die;
+            $resp['code'] = 2;
+            return echoJson($resp,'用户名或密码错误');
         }
     }
 
     /**
-     * 获取jwt
-     * @return string
+     * 判断用户登陆接口
      */
-    public function getJwt($username, $host)
+    public function checkLogin()
     {
-        $key = Env::get('jwt_key');
-        $token = array(
-            "sub" => $username,
-            "iss" => $host."/index/auth/dologin",
-            "iat" => time(),
-            "exp" => time() + 3600,
-            "nbf" => time()
-        );
-        $jwt = JWT::encode($token, $key);
-        return $jwt;
+        $request = request();
+        $header = Request::instance()->header();
+        $decoded_array = JwtHander::getInstance()->decodeJwt($header);
+        if ($decoded_array) {
+            $resp['decoded_jwt'] = $decoded_array;
+            // 重新生成jwt
+            $resp['jwt'] = JwtHander::getInstance()->generateJwt($decoded_array['sub'], $request->host());
+            return echoJson($resp);
+        } else {
+            $resp['code'] = 2;
+            return echoJson($resp,"用户登陆超时");
+        }
     }
 }

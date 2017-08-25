@@ -74,13 +74,17 @@
             _me.$http.post(API_ROOT + '/index/auth/dologin', qs.stringify(data))
               .then((response) => {
                 let resp = response.data
-                if (resp.code === 1) {
-                  _me.$message.success('登陆成功,正在跳转...');
-                  localStorage.username = _me.ruleForm.username
-                  localStorage.jwt = resp.jwt
-                  _me.$router.push("/")
+                if (resp.ret === 200) {
+                  if (resp.data.code === 1) {
+                    _me.$message.success('登陆成功,正在跳转...');
+                    localStorage.username = _me.ruleForm.username
+                    localStorage.jwt = resp.data.jwt
+                    _me.$router.push("/")
+                  } else if (resp.data.code === 2) {
+                    _me.$message.error(resp.msg);
+                  }
                 } else {
-                  _me.$message.error('用户名或密码错误');
+                  _me.$message.error('服务器出错，无法登陆');
                 }
               })
               .catch(function(response) {

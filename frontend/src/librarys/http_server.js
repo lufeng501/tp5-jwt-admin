@@ -3,45 +3,34 @@ import axios from 'axios'
 class HttpServer {
 
   constructor() {
-    // this.$route = new VueRouter
   }
 
-  get(url, data = {}) {
-
+  get (url, data = {}) {
     if (typeof(localStorage.jwt) != 'undefined') {
       var jwt = localStorage.jwt;
     } else {
       var jwt = "";
     }
-
-    console.log('localStorage.jwt',localStorage.jwt)
-
-    console.log('jwt',jwt)
-
-    let _this = this
-    var promise = new Promise(function(resolve, reject) {
+    return new Promise(function (resolve, reject) {
       axios.get(
         url,
         {
+          params: data,
           headers: {'X-JWT-Header': jwt}
         }
       ).then((response) => {
-        console.log('axios.get')
-        console.log(response)
         let resp = response.data
-        if (resp.code == 1){
-          // window.location.href = "/login"
-          resolve(resp);
+        if (resp.ret === 200) {
+          resolve(resp.data);
+          // window.location.href = "http://localhost:8080/#/login"
         } else {
-          reject(resp);
+          reject(resp.data);
         }
-      }).catch(function(response) {
-        console.log('axios.get服务器出错，无法获取数据')
-        console.log(response)
+      }).catch(function (err) {
+        alert("服务器发生错误！")
+        console.log(err)
       });
     });
-
-    return promise;
   }
 }
 

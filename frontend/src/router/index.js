@@ -20,8 +20,10 @@ export default new Router({
     {
       beforeEnter: (to, from, next) => {
         let http_server = new HttpServer()
-        http_server.get(API_ROOT+"/index/auth/checkLogin").then(function (resp) {
-          if (resp.data &&  resp.data.sub) {
+        http_server.get(API_ROOT+"/index/auth/checkLogin").then(function (data) {
+          if (data.decoded_jwt && data.decoded_jwt.sub) {
+            // 刷新jwt
+            localStorage.jwt = data.jwt
             next();
           } else {
             next('/login');
