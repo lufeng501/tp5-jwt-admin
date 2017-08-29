@@ -7,7 +7,9 @@ tp5-jwt-admin是前后端分离的后台系统模板，前端是SPA单页面，�
 
 > 账号：root 密码：123456
 
-![image](http://7xpt3g.com1.z0.glb.clouddn.com/snipaste_20170829_113328.png)
+![nchat](http://7xpt3g.com1.z0.glb.clouddn.com/snipaste_20170829_113328.png)
+
+![nchat](http://7xqb58.com1.z0.glb.clouddn.com/snipaste_20170822_110601.png)
 
 ## 前提
 
