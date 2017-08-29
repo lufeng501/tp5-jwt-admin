@@ -108,14 +108,11 @@ server {
 ```
 
 - 访问:`http://frontend.tp-jwt-admin.com/#/login`
+ 
 
-![登陆](http://oispcbsjw.bkt.clouddn.com/snipaste_20170829_113327.png)
+![image](http://oispcbsjw.bkt.clouddn.com/snipaste_20170829_113328.png)
 
 
 ## TODO 
 
 > 添加默认的权限管理功能
-
-
-
-
