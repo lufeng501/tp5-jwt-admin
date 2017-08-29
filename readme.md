@@ -107,8 +107,7 @@ server {
 }
 ```
 
-- 访问:`http://frontend.tp-jwt-admin.com/#/login`
- 
+> 访问:`http://frontend.tp-jwt-admin.com/#/login` 
 
 ![image](http://oispcbsjw.bkt.clouddn.com/snipaste_20170829_113328.png)
 
