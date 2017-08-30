@@ -3,7 +3,7 @@ tp5-jwt-admin
 
 tp5-jwt-admin是前后端分离的后台系统模板，前端是SPA单页面，后端生成jwt完成用户认证及提供业务数据。
 
-> 演示地址：[http://frontend.tp-jwt-admin.lusion-blog.cn/](http://frontend.tp-jwt-admin.lusion-blog.cn/)
+> 演示地址：[http://frontend.tp-jwt-admin.lusion-blog.cn/#/login](http://frontend.tp-jwt-admin.lusion-blog.cn/#/login)
 
 > 账号：root 密码：123456
 
